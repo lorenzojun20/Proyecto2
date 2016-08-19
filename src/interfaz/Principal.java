@@ -56,7 +56,19 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel3.setText("NUMERO DOS");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 100, 30));
+
+        txtNumeroUno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroUnoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNumeroUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 80, 30));
+
+        txtNumeroDos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroDosKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNumeroDos, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 90, 30));
 
         jLabel4.setText("RESULTADO :");
@@ -114,11 +126,19 @@ public class Principal extends javax.swing.JFrame {
             txtNumeroDos.requestFocusInWindow();
         }
         else{
-        
+           
         
         n1=Double.parseDouble(txtNumeroUno.getText());
         n2=Double.parseDouble(txtNumeroDos.getText());
         op=cmbOperacion.getSelectedIndex();
+         if(op==3 && n2 == 0){
+             JOptionPane.showMessageDialog(this, "No digite cero en el segundo Número", "Error", JOptionPane.ERROR_MESSAGE);
+             txtNumeroDos.requestFocusInWindow();
+             txtNumeroDos.selectAll();
+         }
+         else{
+        
+        
         switch(op){
             case 0:
                 resultado=n1+n2;
@@ -133,7 +153,7 @@ public class Principal extends javax.swing.JFrame {
                 resultado=n1/n2;
                 break;
         }
-        
+         }
        
         res=String.valueOf(resultado);
         txtResultado.setText(res);}
@@ -149,6 +169,25 @@ public class Principal extends javax.swing.JFrame {
         cmbOperacion.setSelectedIndex(0);
         
     }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void txtNumeroUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroUnoKeyTyped
+         char c=evt.getKeyChar(); 
+             
+         
+          if(!Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); }
+    }//GEN-LAST:event_txtNumeroUnoKeyTyped
+
+    private void txtNumeroDosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroDosKeyTyped
+       char c=evt.getKeyChar();
+        
+        if(!Character.isDigit(c)) { 
+              getToolkit().beep(); 
+               
+              evt.consume(); }
+    }//GEN-LAST:event_txtNumeroDosKeyTyped
 
     /**
      * @param args the command line arguments
